@@ -1,0 +1,1 @@
+Please add the static HTML pages in this folder. The home page content is displayed in index.html
