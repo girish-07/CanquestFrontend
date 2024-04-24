@@ -27,17 +27,17 @@ document.getElementById("postcodeForm").addEventListener("submit", function(even
     var postcode = document.getElementById("postcode").value;
     var serviceProvider = document.getElementById("service-provider").value;
     if(!isValidPostalCode(postcode)) {
-        alert("Invalid Postcode");
+        alert("INVALID POSTCODE");
         event.preventDefault();
         window.location.href = "invalidPostCode.html"
     }
     else if(!canadaPostcodes.includes(postcode)) {
-        alert("Invalid Postcode")
+        alert("ILLEGAL POSTCODE")
         event.preventDefault();
         window.location.href = "illegalPostCode.html"
     }
     else if(!availablePostcodes.includes(postcode)) {
-        alert("Invalid Postcode")
+        alert("UNAVAILABLE POSTCODE")
         event.preventDefault();
         window.location.href = "serviceNA.html"
     }
