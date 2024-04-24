@@ -16,7 +16,9 @@ are
 Visual Studio Code
 
 ## How To Run This
-Navigate to the root folder and give http-server
+Navigate to the root folder and give the command
+http-server
+in the terminal
 
 ## NOTE TO THE CONTRIBUTORS
 Please add the tech stacks or any specifications. Keep documenting the tools used along with the versions. Please use stable version.
