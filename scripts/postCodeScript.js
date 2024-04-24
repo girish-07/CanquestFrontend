@@ -1,34 +1,19 @@
-// Define global arrays to store JSON object records
-var sheet1Data = [];
-var sheet2Data = [];
+const canadaPostcodes = [
+    "A1A 1A1",
+    "B2B 2B2",
+    "C3C 3C3",
+    "H0H 0H0",
+    "K1A 0B1",
+    "A2A 2A2",    
+]
 
-window.onload = function() {
-    fetch('../data/canquest.xlsx')
-        .then(response => response.arrayBuffer())
-        .then(arrayBuffer => {
-            var data = new Uint8Array(arrayBuffer);
-            var workbook = XLSX.read(data, { type: 'array' });
-
-            // Parse each sheet's data and store in separate arrays
-            workbook.SheetNames.forEach(function(sheetName, index) {
-                var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-                if (index === 0) {
-                    sheet1Data = XL_row_object;
-                } else if (index === 1) {
-                    sheet2Data = XL_row_object;
-                }
-            });
-
-            // Call a function that requires the parsed data
-            processData();
-        })
-        .catch(error => {
-            console.error('Error fetching or parsing the Excel file:', error);
-        });
-        console.log(sheet1Data)
-        console.log(sheet2Data)
-};
-
+const availablePostcodes = [
+    "A1A 1A1",
+    "B2B 2B2",
+    "C3C 3C3",
+    "H0H 0H0",
+    "K1A 0B1",
+];
 
 function isValidPostalCode(postcode) { // Checks for regex matching in Canada postcode
     // Reference https://stackoverflow.com/questions/15774555/efficient-regex-for-canadian-postal-code-function
@@ -41,5 +26,20 @@ document.getElementById("postcodeForm").addEventListener("submit", function(even
     if(!isValidPostalCode(postcode)) {
         alert("Invalid Postcode");
         event.preventDefault();
+        window.location.href = "invalidPostCode.html"
+    }
+    else if(!canadaPostcodes.includes(postcode)) {
+        alert("Invalid Postcode")
+        event.preventDefault();
+        window.location.href = "illegalPostCode.html"
+    }
+    else if(!availablePostcodes.includes(postcode)) {
+        alert("Invalid Postcode")
+        event.preventDefault();
+        window.location.href = "serviceNA.html"
+    }
+    else {
+        event.preventDefault();
+        window.location.href = "orderConfirmation.html"
     }
 })
