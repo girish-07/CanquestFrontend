@@ -17,6 +17,24 @@ const availablePostcodes = [
     "N0N 0A1",
 ];
 
+let postcodes = []
+
+function fetchJSONFile(filename, callback) {
+    fetch(filename)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            callback(data);
+        })
+        .catch(error => {
+            console.error('There was a problem fetching the JSON file:', error);
+        });
+}
+
 function isValidPostalCode(postcode) { // Checks for regex matching in Canada postcode
     // Reference https://stackoverflow.com/questions/15774555/efficient-regex-for-canadian-postal-code-function
     var postalCodePattern = /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i;
@@ -26,7 +44,19 @@ function isValidPostalCode(postcode) { // Checks for regex matching in Canada po
 document.getElementById("postcodeForm").addEventListener("submit", function(event) {
     var postcode = document.getElementById("postcode").value;
     var serviceProvider = document.getElementById("service-provider").value;
-    if(!isValidPostalCode(postcode)) {
+    if(postcodes.includes(postcode)) {
+        event.preventDefault();
+        sessionStorage.setItem('postcode', postcode)
+        sessionStorage.setItem('serviceProvider', serviceProvider)
+        if(document.getElementById('buy').checked) {
+            sessionStorage.setItem('buy_rent_option', 'buy');
+        }
+        else {
+            sessionStorage.setItem('buy_rent_option', 'rent');
+        }
+        window.location.href = "checkout.html"
+    }
+    else if(!isValidPostalCode(postcode)) {
         alert("INVALID POSTCODE");
         event.preventDefault();
         window.location.href = "invalidPostCode.html"
@@ -54,3 +84,28 @@ document.getElementById("postcodeForm").addEventListener("submit", function(even
         window.location.href = "checkout.html"
     }
 })
+
+document.addEventListener('DOMContentLoaded', function() {
+    let jsonFilename = '../data/Postcode1.json'; // Replace 'your_json_file.json' with the actual filename
+
+    // Call fetchJSONFile function to fetch the JSON file
+    fetchJSONFile(jsonFilename, function(data) {
+        // Extract postcode values from the data and store them in the array
+        data.forEach(item => {
+            postcodes.push(item["Postal Code"].trim());
+        });
+
+        // You can now use the 'postcodes' array for further processing
+        console.log('Postcodes:', postcodes);
+    });
+    jsonFilename = '../data/Postcode2.json';
+    fetchJSONFile(jsonFilename, function(data) {
+        // Extract postcode values from the data and store them in the array
+        data.forEach(item => {
+            postcodes.push(item["Postal Code"].trim());
+        });
+
+        // You can now use the 'postcodes' array for further processing
+        console.log('Postcodes:', postcodes);
+    });
+});
