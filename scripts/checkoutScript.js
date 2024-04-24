@@ -59,40 +59,84 @@ document.addEventListener('DOMContentLoaded', function() {
                 plansValid = fetchSpeedAndRate(province, provider, data)
                 plans = plansValid
                 if (plans.length > 0) {
-                    const plansList = document.getElementById('plansTable');
-                    let row = document.createElement('tr');
+                    let plansList = document.getElementById('plansTable');
+                    let tabCellHeading = document.createElement('th');
+                    let serviceProviderHeading = document.createElement('th');
+                    let rowHeading = document.createElement('tr');
                     let speedHeading = document.createElement('th');
+                    let radioButtonHeading = document.createElement('th');
+                    radioButtonHeading.textContent = "  ";
+                    tabCellHeading.textContent = "  ";
                     speedHeading.textContent = "SPEED";
-                    row.append(speedHeading);
+                    serviceProviderHeading.textContent = "INTERNET PROVIDER";
+                    rowHeading.append(radioButtonHeading);
+                    rowHeading.append(tabCellHeading);
+                    rowHeading.append(serviceProviderHeading);
+                    rowHeading.append(tabCellHeading);
+                    rowHeading.append(speedHeading);
+                    rowHeading.append(tabCellHeading);
                     let costHeading = document.createElement('th');
                     costHeading.textContent = "COST";
-                    row.append(costHeading);
-                    plansList.appendChild(row);
+                    rowHeading.append(costHeading);
+                    plansList.appendChild(rowHeading);
                     let counter=0;
                     plans.forEach(plan => {
                         if(counter<5) {
                             const listItem = document.createElement('li');
                             let row = document.createElement('tr');
                             let speedCell = document.createElement('td');
+                            let tabCell = document.createElement('td');
                             let costCell = document.createElement('td');
+                            let serviceProviderCell = document.createElement('td');
+                            let nbspNode = document.createTextNode('\u00A0'); // '\u00A0' represents the non-breaking space character
                             let modemRental = parseFloat(plan["Modem Rental/ Month"].replace('$', ''))
                             let routerRetail = parseFloat(plan["Router Retail"].replace('$', ''))
                             let routerRental = parseFloat(plan["Router Rental"].replace('$', ''))
-                            let rentRate = plan["Retail"]+plan["1x Connect. Cost (New)"]+modemRental+routerRental
-                            let buyRate = plan["Retail"]+plan["1x Connect. Cost (New)"]+plan["Modem Cost"]+routerRetail
-                            speedCell.textContent = plan["Speed"]
+                            let rentRate = parseInt(plan["Retail"])+parseInt(plan["1x Connect. Cost (New)"])+parseInt(modemRental)+parseInt(routerRental);
+                            let buyRate = parseInt(plan["Retail"])+parseInt(plan["1x Connect. Cost (New)"])+parseInt(plan["Modem Cost"])+parseInt(routerRetail);
+
+                            let radioButton = document.createElement('input');
+                            radioButton.setAttribute('name', 'planRadioButton');
+                            radioButton.setAttribute('type', 'radio');
+                            radioButton.setAttribute('value', plan);
+                            radioButton.addEventListener('click', function() {
+                                if(buyOrRent === "buy") {
+                                    sessionStorage.setItem('retailPrice', plan["Retail"]);
+                                    sessionStorage.setItem('newConnectionCost', plan["1x Connect. Cost (New)"]);
+                                    sessionStorage.setItem('modemCost', plan["Modem Cost"]);
+                                    sessionStorage.setItem('routerRetailCost', routerRetail);
+                                    sessionStorage.setItem('totalPrice', buyRate)
+                                }
+                                else {
+                                    sessionStorage.setItem('retailPrice', plan["Retail"]);
+                                    sessionStorage.setItem('newConnectionCost', plan["1x Connect. Cost (New)"]);
+                                    sessionStorage.setItem('modemRentalCost', modemRental);
+                                    sessionStorage.setItem('routerRentalCost', routerRental);
+                                    sessionStorage.setItem('totalPrice', rentRate);
+                                }
+                                window.location.href = '../templates/orderConfirmation.html';
+                            });
+                            speedCell.textContent = plan["Speed"];
+                            serviceProviderCell.textContent = plan["Third Party Internet Provider"];
 
                             if(buyOrRent === "buy") {
-                                costCell.textContent = buyRate;
+                                costCell.textContent = parseInt(buyRate);
                                 listItem.textContent = `Speed: ${plan["Speed"]}, Rate: ${buyRate}`;
                             }
                             else {
-                                costCell.textContent = rentRate
+                                costCell.textContent = parseInt(rentRate);
                                 listItem.textContent = `Speed: ${plan["Speed"]}, Rate: ${rentRate}`;
                             }
 
-                            row.append(speedCell)
-                            row.append(costCell)
+                            row.append(radioButton);
+                            row.append(nbspNode);
+                            row.append(nbspNode);
+                            row.append(tabCell);
+                            row.append(serviceProviderCell);
+                            row.append(tabCell);
+                            row.append(speedCell);
+                            row.append(tabCell);
+                            row.append(costCell);
                             plansList.appendChild(row);
                             counter++;
                         }
