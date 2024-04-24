@@ -10,9 +10,13 @@ are
 + HTML
 + CSS
 + JS (Vanilla JS)
++ Node JS
 
 ## Code Editor
 Visual Studio Code
+
+## How To Run This
+Navigate to the root folder and give http-server
 
 ## NOTE TO THE CONTRIBUTORS
 Please add the tech stacks or any specifications. Keep documenting the tools used along with the versions. Please use stable version.

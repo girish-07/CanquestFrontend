@@ -4,7 +4,8 @@ const canadaPostcodes = [
     "C3C 3C3",
     "H0H 0H0",
     "K1A 0B1",
-    "A2A 2A2",    
+    "A2A 2A2",  
+    "N0N 0A1",  
 ]
 
 const availablePostcodes = [
@@ -13,6 +14,7 @@ const availablePostcodes = [
     "C3C 3C3",
     "H0H 0H0",
     "K1A 0B1",
+    "N0N 0A1",
 ];
 
 function isValidPostalCode(postcode) { // Checks for regex matching in Canada postcode
@@ -23,6 +25,7 @@ function isValidPostalCode(postcode) { // Checks for regex matching in Canada po
 
 document.getElementById("postcodeForm").addEventListener("submit", function(event) {
     var postcode = document.getElementById("postcode").value;
+    var serviceProvider = document.getElementById("service-provider").value;
     if(!isValidPostalCode(postcode)) {
         alert("Invalid Postcode");
         event.preventDefault();
@@ -40,6 +43,14 @@ document.getElementById("postcodeForm").addEventListener("submit", function(even
     }
     else {
         event.preventDefault();
-        window.location.href = "orderConfirmation.html"
+        sessionStorage.setItem('postcode', postcode)
+        sessionStorage.setItem('serviceProvider', serviceProvider)
+        if(document.getElementById('buy').checked) {
+            sessionStorage.setItem('buy_rent_option', 'buy');
+        }
+        else {
+            sessionStorage.setItem('buy_rent_option', 'rent');
+        }
+        window.location.href = "checkout.html"
     }
 })
