@@ -11,3 +11,78 @@ body, html {
     justify-content: center;
     height: 100%;
 }
+
+.plans-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    width: 100%; /* Adjust width as needed */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    margin-left: 150px;
+}
+
+.card-text {
+    font-size: 16px;
+    margin-bottom: 10px;
+    margin-left: 140px;
+}
+
+.btn {
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+h1 {
+    position: absolute;
+    top: 20px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Add styling for speed elements */
+.speed-circle {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ccc;
+    text-align: center;
+    line-height: 30px;
+    margin-right: 5px; /* Adjust spacing between circle and label */
+}
+
+.speed-container {
+    display: inline-block;
+}
+
+.label-value-container {
+    text-align: center;
+}
+
+.label, .value {
+    display: inline-block;
+    margin: 0;
+}
