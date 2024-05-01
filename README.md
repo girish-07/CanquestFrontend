@@ -11,6 +11,7 @@ are
 + CSS
 + JS (Vanilla JS)
 + Node JS
++ Jenkins (Basic Pipeline is being built)
 
 ## Code Editor
 Visual Studio Code
