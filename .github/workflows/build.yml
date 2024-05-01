@@ -1,0 +1,12 @@
+on: push
+jobs:
+  build-node:
+    runs-on: ubuntu-latest
+    steps:
+      - run: node --version
+      - run: npm --version
+      - uses: actions/checkout@v3
+      - run: npm install
+      - run: npm install http-server
+      - run: (npx http-server -p 8080 -d true ./../CanquestFrontend & echo $! > http_server_pid.txt)
+      - run: sleep 10s
