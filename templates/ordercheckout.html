@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Order Checkout</title>
+<link rel='stylesheet' href="../styles/ordercheckout.css">
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const buyOrRent = sessionStorage.getItem("buy_rent_option");
+
+    document.getElementById('retailPrice').textContent = parseInt(sessionStorage.getItem('retailPrice')) || 'N/A';
+    document.getElementById('newConnectionCost').textContent = parseInt(sessionStorage.getItem('newConnectionCost')) || 'N/A';
+
+    if(buyOrRent === 'buy') {
+        document.getElementById('modemCost').textContent = parseInt(sessionStorage.getItem('modemCost')) || 'N/A';
+        document.getElementById('routerRetailCost').textContent = parseInt(sessionStorage.getItem('routerRetailCost')) || 'N/A';
+        document.getElementById('rentalCosts').style.display = 'none';
+    }
+    else {
+        document.getElementById('modemRentalCost').textContent = parseInt(sessionStorage.getItem('modemRentalCost')) || 'N/A';
+        document.getElementById('routerRentalCost').textContent = parseInt(sessionStorage.getItem('routerRentalCost')) || 'N/A';
+        document.getElementById('buyCosts').style.display = 'none';
+    }
+
+    document.getElementById('totalCost').textContent = sessionStorage.getItem('totalPrice') || 'N/A';
+});
+</script>
+</head>
+<body>
+    <h1 class="title">ORDER CHECK OUT</h1>
+    <div class="card">
+        <h3>Plan cost spilt up</h3>
+        <hr>
+        Retail Price:$ <span id="retailPrice"></span><br>
+        New connection cost: $<span id="newConnectionCost"></span><br>
+        <div id="buyCosts">
+            Modem cost:$ <span id="modemCost"></span><br>
+            Router retail cost: $<span id="routerRetailCost"></span><br>
+        </div>
+        <div id="rentalCosts">
+            Modem rental cost: $<span id="modemRentalCost"></span><br>
+            Router rental cost: $<span id="routerRentalCost"></span><br>
+        </div>
+        <hr>
+        Total: $<span id="totalCost"></span>
+    </div>
+
+    <br>
+    <div class="button">
+        <a href="OrderConfirmation.html">
+            <button>Go Back</button>
+        </a>
+        <a href="ordercheckout2.html">
+            <button>Place Order</button>
+        </a>
+    </div>
+</body>
+</html>
