@@ -43,17 +43,9 @@ function isValidPostalCode(postcode) { // Checks for regex matching in Canada po
 
 document.getElementById("postcodeForm").addEventListener("submit", function(event) {
     var postcode = document.getElementById("postcode").value;
-    var serviceProvider = document.getElementById("service-provider").value;
     if(postcodes.includes(postcode)) {
         event.preventDefault();
         sessionStorage.setItem('postcode', postcode)
-        sessionStorage.setItem('serviceProvider', serviceProvider)
-        if(document.getElementById('buy').checked) {
-            sessionStorage.setItem('buy_rent_option', 'buy');
-        }
-        else {
-            sessionStorage.setItem('buy_rent_option', 'rent');
-        }
         window.location.href = "checkout.html"
     }
     else if(!isValidPostalCode(postcode)) {
@@ -73,14 +65,7 @@ document.getElementById("postcodeForm").addEventListener("submit", function(even
     }
     else {
         event.preventDefault();
-        sessionStorage.setItem('postcode', postcode)
-        sessionStorage.setItem('serviceProvider', serviceProvider)
-        if(document.getElementById('buy').checked) {
-            sessionStorage.setItem('buy_rent_option', 'buy');
-        }
-        else {
-            sessionStorage.setItem('buy_rent_option', 'rent');
-        }
+        sessionStorage.setItem('postcode', postcode);
         window.location.href = "checkout.html"
     }
 })

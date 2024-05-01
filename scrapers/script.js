@@ -2,10 +2,10 @@ const fs = require('fs');
 const xlsx = require('xlsx');
 
 // Load the Excel file
-const workbook = xlsx.readFile('../data/canquest.xlsx');
+const workbook = xlsx.readFile('../data/Cable Providers in Canada.xlsx');
 
 // Assuming there's only one sheet, you can change the index if there are multiple sheets
-const sheetName = workbook.SheetNames[1];
+const sheetName = workbook.SheetNames[0];
 const sheet = workbook.Sheets[sheetName];
 
 // Convert the sheet to JSON format
