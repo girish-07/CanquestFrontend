@@ -185,6 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                             // Create container for the checkbox and label
                             const rentModemContainer = document.createElement('div');
+                            rentModemContainer.classList.add('mt-1');
                             rentModemContainer.classList.add('rent-modem-container');
 
                             rentModemContainer.appendChild(rentModemCheckbox);
