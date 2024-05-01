@@ -7,5 +7,5 @@ jobs:
       - run: npm --version
       - uses: actions/checkout@v3
       - run: npm install
-      - run: cd ../../
-      - run: http-server
+      - run: npm install http-server
+      - run: npx http-server -p 8080 -d true ./../CanquestFrontend
