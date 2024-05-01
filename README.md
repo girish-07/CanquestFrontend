@@ -22,3 +22,7 @@ in the terminal
 
 ## NOTE TO THE CONTRIBUTORS
 Please add the tech stacks or any specifications. Keep documenting the tools used along with the versions. Please use stable version.
+
+## JENKINS
+
+[![Build Status](http://localhost:8080/jenkins/buildStatus/icon?job=Canquest)](http://localhost:8080/job/Canquest/)
