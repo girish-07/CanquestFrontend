@@ -188,6 +188,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             rentModemContainer.classList.add('mt-1');
                             rentModemContainer.classList.add('rent-modem-container');
 
+                            let buyOrRent = rentModemCheckbox.checked ? 'rent' : 'buy';
+                            rentModemCheckbox.addEventListener('change', function() {
+                                buyOrRent = this.checked ? 'rent' : 'buy';
+                            });
+
                             rentModemContainer.appendChild(rentModemCheckbox);
                             rentModemContainer.appendChild(rentModemLabel);
                         
@@ -195,6 +200,23 @@ document.addEventListener('DOMContentLoaded', function() {
                             selectButton.classList.add('btn', 'btn-primary');
                             selectButton.textContent = 'Order';
                             selectButton.addEventListener('click', function() {
+
+                                //add sessionstorage variables
+                                if(buyOrRent === "buy") {
+                                    sessionStorage.setItem('retailPrice', plan["Retail"]);
+                                    sessionStorage.setItem('newConnectionCost', plan["1x Connect. Cost (New)"]);
+                                    sessionStorage.setItem('modemCost', plan["Modem Cost"]);
+                                    sessionStorage.setItem('routerRetailCost', routerRetail);
+                                    sessionStorage.setItem('totalPrice', buyRate)
+                                }
+                                else {
+                                    sessionStorage.setItem('retailPrice', plan["Retail"]);
+                                    sessionStorage.setItem('newConnectionCost', plan["1x Connect. Cost (New)"]);
+                                    sessionStorage.setItem('modemRentalCost', modemRental);
+                                    sessionStorage.setItem('routerRentalCost', routerRental);
+                                    sessionStorage.setItem('totalPrice', rentRate);
+                                }
+
                                 window.location.href='../templates/ordercheckout.html'
                             });
 
