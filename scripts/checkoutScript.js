@@ -185,42 +185,64 @@ document.addEventListener('DOMContentLoaded', function() {
 
                             // Create container for the checkbox and label
                             const rentModemContainer = document.createElement('div');
+                            rentModemContainer.classList.add('rent-modem-container');
 
                             rentModemContainer.appendChild(rentModemCheckbox);
                             rentModemContainer.appendChild(rentModemLabel);
                         
                             const selectButton = document.createElement('button');
                             selectButton.classList.add('btn', 'btn-primary');
-                            selectButton.textContent = 'Select Plan';
+                            selectButton.textContent = 'Order';
                             selectButton.addEventListener('click', function() {
-                                handleButtonClick(plan);
+                                window.location.href='../templates/ordercheckout.html'
                             });
+
+                            const buttonChecklistContainer = document.createElement('div');
+                            rentModemContainer.classList.add('button-checklist-container');
+                            buttonChecklistContainer.appendChild(rentModemContainer);
+                            buttonChecklistContainer.appendChild(document.createTextNode('\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0')); // Add space between circles
+                            buttonChecklistContainer.appendChild(document.createTextNode('\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0')); // Add space between circles
+                            buttonChecklistContainer.appendChild(document.createTextNode('\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0')); // Add space between circles
+                            buttonChecklistContainer.appendChild(selectButton);
 
                             const labelValuePairContainer = document.createElement('div');
                             labelValuePairContainer.classList.add('label-value-container');
-
+                            
                             // Create label element for technology
-                            const technologyLabel = document.createElement('p');
+                            const technologyLabel = document.createElement('label');
                             technologyLabel.textContent = 'Technology:';
                             technologyLabel.classList.add('label');
-
-                            // Create value element for technology
-                            const technologyValue = document.createElement('p');
-                            technologyValue.textContent = 'Cable';
-                            technologyValue.classList.add('value');
-
-                            // Append label and value elements to the container
+                            
+                            // Create select element for dropdown
+                            const technologyDropdown = document.createElement('select');
+                            technologyDropdown.classList.add('dropdown');
+                            
+                            // Create options for the dropdown
+                            const option1 = document.createElement('option');
+                            option1.textContent = 'Cable';
+                            option1.value = 'cable'; // Set value attribute if needed
+                            
+                            const option2 = document.createElement('option');
+                            option2.textContent = 'DSL';
+                            option2.value = 'dsl'; // Set value attribute if needed
+                            
+                            // Append options to the dropdown
+                            technologyDropdown.appendChild(option1);
+                            technologyDropdown.appendChild(option2);
+                            
+                            // Append label and dropdown to the container
                             labelValuePairContainer.appendChild(technologyLabel);
-                            labelValuePairContainer.appendChild(technologyValue);
+                            labelValuePairContainer.appendChild(technologyDropdown);
                         
                             cardBody.appendChild(cardTitle);
                             // cardBody.appendChild(serviceProvider);
                             cardBody.appendChild(cost);
                             cardBody.appendChild(speedRange);
                             cardBody.appendChild(labelValuePairContainer);
-                            cardBody.appendChild(rentModemContainer);
+                            //cardBody.appendChild(rentModemContainer);
                             // cardBody.appendChild(radioButton);
                             // cardBody.appendChild(selectButton);
+                            cardBody.appendChild(buttonChecklistContainer);
                         
                             card.appendChild(cardBody);
                         

@@ -90,3 +90,12 @@ h1 {
 .left-aligned {
     margin-right: 30px;
 }
+
+.rent-modem-container {
+    display: inline-block;
+    margin-right: 10px; /* Adjust margin as needed */
+}
+
+.button-checklist-container {
+    margin-bottom: 10px;
+}
