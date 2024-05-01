@@ -133,11 +133,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
                             // Create container for speed elements
                             const speedContainer = document.createElement('div');
-                            speedContainer.classList.add('speed-container');
+                            speedContainer.classList.add('speed-container', 'left-aligned');
 
                             // Create circle for max speed
                             const maxSpeedCircle = document.createElement('span');
                             maxSpeedCircle.classList.add('speed-circle');
+                            maxSpeedCircle.textContent = '▼';
 
                             // Create label for max speed
                             const maxSpeedLabel = document.createElement('span');
@@ -146,6 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             // Create circle for min speed
                             const minSpeedCircle = document.createElement('span');
                             minSpeedCircle.classList.add('speed-circle');
+                            minSpeedCircle.textContent = '▲';
 
                             // Create label for min speed
                             const minSpeedLabel = document.createElement('span');
@@ -154,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             // Append elements to speedContainer
                             speedContainer.appendChild(maxSpeedCircle);
                             speedContainer.appendChild(maxSpeedLabel);
-                            speedContainer.appendChild(document.createTextNode('\t\t')); // Add space between circles
+                            speedContainer.appendChild(document.createTextNode('\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0')); // Add space between circles
                             speedContainer.appendChild(minSpeedCircle);
                             speedContainer.appendChild(minSpeedLabel);
 

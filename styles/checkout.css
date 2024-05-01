@@ -86,3 +86,7 @@ h1 {
     display: inline-block;
     margin: 0;
 }
+
+.left-aligned {
+    margin-right: 30px;
+}
