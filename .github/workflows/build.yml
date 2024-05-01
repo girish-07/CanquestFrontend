@@ -9,3 +9,4 @@ jobs:
       - run: npm install
       - run: npm install http-server
       - run: npx http-server -p 8080 -d true ./../CanquestFrontend
+      - run: sleep 10s
