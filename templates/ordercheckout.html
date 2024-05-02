@@ -9,7 +9,8 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const buyOrRent = sessionStorage.getItem("buy_rent_option");
-
+            const planName = sessionStorage.getItem('planName');
+            document.getElementById('orderTitle').textContent = `${planName}`;
             document.getElementById('retailPrice').textContent = `$ ${parseInt(sessionStorage.getItem('retailPrice')) || 'N/A'}`;
             document.getElementById('newConnectionCost').textContent = `$ ${parseInt(sessionStorage.getItem('newConnectionCost')) || 'N/A'}`;
 
@@ -31,7 +32,7 @@
 
 <body>
     <h1 class="title">ORDER</h1>
-
+    <h3 class="title" id="orderTitle"></h3>
     <div>
         <div class="card text-center">
             <h3>Plan cost spilt up</h3>
