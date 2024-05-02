@@ -1,0 +1,37 @@
+.text-center {
+    text-align: center;
+}
+
+.btn {
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+}
+
+.back {
+    background-color: #d5cfcf;
+    color: #000000;
+}
+
+.next {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.back:hover {
+    background-color: #f9f7f7;
+}
+
+.next:hover {
+    background-color: #0056b3;
+}
+
+.content-center {
+    align-content: center;
+}
+
+.h-100vh {
+    height: 100vh;
+}

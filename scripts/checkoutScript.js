@@ -176,12 +176,14 @@ document.addEventListener('DOMContentLoaded', function() {
                             const rentModemCheckbox = document.createElement('input');
                             rentModemCheckbox.setAttribute('type', 'checkbox');
                             rentModemCheckbox.setAttribute('id', 'rentModemCheckbox'); // Set id for the checkbox if needed
-                            rentModemCheckbox.checked = true;
+                            // const getRent = sessionStorage.getItem("buy_rent_option");
+                            // rentModemCheckbox.checked = getRent === 'rent' ? true : false;
+                            rentModemCheckbox.checked = true
 
                             // Create label element for the checkbox
                             const rentModemLabel = document.createElement('label');
                             rentModemLabel.setAttribute('for', 'rentModemCheckbox'); // Set for attribute to associate the label with the checkbox
-                            rentModemLabel.textContent = 'Rent Modem'; // Text content for the label
+                            rentModemLabel.textContent = 'Rent Modem / Router'; // Text content for the label
 
                             // Create container for the checkbox and label
                             const rentModemContainer = document.createElement('div');
@@ -191,6 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             let buyOrRent = rentModemCheckbox.checked ? 'rent' : 'buy';
                             rentModemCheckbox.addEventListener('change', function() {
                                 buyOrRent = this.checked ? 'rent' : 'buy';
+                                sessionStorage.setItem("buy_rent_option", this.checked ? 'rent' : 'buy');
                             });
 
                             rentModemContainer.appendChild(rentModemCheckbox);

@@ -47,26 +47,21 @@ document.getElementById("postcodeForm").addEventListener("submit", function(even
         event.preventDefault();
         sessionStorage.setItem('postcode', postcode)
         window.location.href = "checkout.html"
-    }
-    else if(!isValidPostalCode(postcode)) {
+    } 
+    else if(postcode.length != 7) {
         alert("INVALID POSTCODE");
         event.preventDefault();
         window.location.href = "invalidPostCode.html"
     }
-    else if(!canadaPostcodes.includes(postcode)) {
+    else if(!isValidPostalCode(postcode)) {
         alert("ILLEGAL POSTCODE")
         event.preventDefault();
         window.location.href = "illegalPostCode.html"
     }
-    else if(!availablePostcodes.includes(postcode)) {
+    else {
         alert("UNAVAILABLE POSTCODE")
         event.preventDefault();
         window.location.href = "serviceNA.html"
-    }
-    else {
-        event.preventDefault();
-        sessionStorage.setItem('postcode', postcode);
-        window.location.href = "checkout.html"
     }
 })
 
