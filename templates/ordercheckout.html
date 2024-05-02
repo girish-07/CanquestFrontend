@@ -1,88 +1,95 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Order Checkout</title>
-<link rel='stylesheet' href="../styles/ordercheckout.css">
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const buyOrRent = sessionStorage.getItem("buy_rent_option");
+    <meta charset="UTF-8">
+    <title>Order Checkout</title>
+    <link rel='stylesheet' href="../styles/ordercheckout.css">
+    <link rel="stylesheet" href="../styles/common.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const buyOrRent = sessionStorage.getItem("buy_rent_option");
 
-    document.getElementById('retailPrice').textContent = parseInt(sessionStorage.getItem('retailPrice')) || 'N/A';
-    document.getElementById('newConnectionCost').textContent = parseInt(sessionStorage.getItem('newConnectionCost')) || 'N/A';
+            document.getElementById('retailPrice').textContent = `$ ${parseInt(sessionStorage.getItem('retailPrice')) || 'N/A'}`;
+            document.getElementById('newConnectionCost').textContent = `$ ${parseInt(sessionStorage.getItem('newConnectionCost')) || 'N/A'}`;
 
-    if(buyOrRent === 'buy') {
-        document.getElementById('modemCost').textContent = parseInt(sessionStorage.getItem('modemCost')) || 'N/A';
-        document.getElementById('routerRetailCost').textContent = parseInt(sessionStorage.getItem('routerRetailCost')) || 'N/A';
-        document.getElementById('rentalCosts').style.display = 'none';
-    }
-    else {
-        document.getElementById('modemRentalCost').textContent = parseInt(sessionStorage.getItem('modemRentalCost')) || 'N/A';
-        document.getElementById('routerRentalCost').textContent = parseInt(sessionStorage.getItem('routerRentalCost')) || 'N/A';
-        document.getElementById('buyCosts').style.display = 'none';
-    }
+            if (buyOrRent === 'buy') {
+                document.getElementById('modemCost').textContent = `$ ${parseInt(sessionStorage.getItem('modemCost')) || 'N/A'}`;
+                document.getElementById('routerRetailCost').textContent = `$ ${parseInt(sessionStorage.getItem('routerRetailCost')) || 'N/A'}`;
+                document.getElementById('rentalCosts').style.display = 'none';
+            }
+            else {
+                document.getElementById('modemRentalCost').textContent = `$ ${parseInt(sessionStorage.getItem('modemRentalCost')) || 'N/A'}`;
+                document.getElementById('routerRentalCost').textContent = `$ ${parseInt(sessionStorage.getItem('routerRentalCost')) || 'N/A'}`;
+                document.getElementById('buyCosts').style.display = 'none';
+            }
 
-    document.getElementById('totalCost').textContent = sessionStorage.getItem('totalPrice') || 'N/A';
-});
-</script>
+            document.getElementById('totalCost').textContent = `$ ${sessionStorage.getItem('totalPrice') || 'N/A'}`;
+        });
+    </script>
 </head>
 
 <body>
-    <h1 class="title">ORDER CHECK OUT</h1>
-    <div class="card text-center">
-        <h3>Plan cost spilt up</h3>
-        <hr>
-        <p class="d-flex">
-            <span>Retail Price :</span>
-            <span id="retailPrice"></span><br>
-        </p>
-        <p class="d-flex">
-            <span>New connection cost :</span>
-            <span id="newConnectionCost"></span><br>
-        </p>
-        <div id="buyCosts">
-            <p class="d-flex">
-                <span>Modem cost :</span>
-                <span id="modemCost"></span><br>
+    <h1 class="title">ORDER</h1>
+
+    <div>
+        <div class="card text-center">
+            <h3>Plan cost spilt up</h3>
+            <hr>
+            <p class="d-flex-row justify-space-between">
+                <span class="w-50 d-flex-row justify-start">Retail Price :</span>
+                <span class="w-50 d-flex-row justify-start" id="retailPrice"></span><br>
             </p>
-            <p class="d-flex">
-                <span>Router retail cost :</span>
-                <span id="routerRetailCost"></span><br>
+            <p class="d-flex-row justify-space-between">
+                <span class="w-50 d-flex-row justify-start">New connection cost :</span>
+                <span class="w-50 d-flex-row justify-start" id="newConnectionCost"></span><br>
+            </p>
+            <div id="buyCosts">
+                <p class="d-flex-row justify-space-between">
+                    <span class="w-50 d-flex-row justify-start">Modem cost :</span>
+                    <span class="w-50 d-flex-row justify-start" id="modemCost"></span><br>
+                </p>
+                <p class="d-flex-row justify-space-between">
+                    <span class="w-50 d-flex-row justify-start">Router retail cost :</span>
+                    <span class="w-50 d-flex-row justify-start" id="routerRetailCost"></span><br>
+                </p>
+            </div>
+            <div id="rentalCosts">
+                <p class="d-flex-row justify-space-between">
+                    <span class="w-50 d-flex-row justify-start">Modem rental cost :</span>
+                    <span class="w-50 d-flex-row justify-start" id="modemRentalCost"></span><br>
+                </p>
+                <p class="d-flex-row justify-space-between">
+                    <span class="w-50 d-flex-row justify-start">Router rental cost :</span>
+                    <span class="w-50 d-flex-row justify-start" id="routerRentalCost"></span><br>
+                </p>
+            </div>
+            <hr>
+            <p class="d-flex-row justify-space-between">
+                <span class="w-50 d-flex-row justify-start">Total :</span>
+                <span class="w-50 d-flex-row justify-start" id="totalCost"></span>
             </p>
         </div>
-        <div id="rentalCosts">
-            <p class="d-flex">
-                <span>Modem rental cost :</span>
-                <span id="modemRentalCost"></span><br>
-            </p>
-            <p class="d-flex">
-                <span>Router rental cost :</span>
-                <span id="routerRentalCost"></span><br>
-            </p>
+
+        <div>
+            <div class="card text-center mt-2">
+                <form id="ordercheckout">
+                    <br>
+                    <label for="Address">Address:</label>
+                    <input type="text" id="address" name="address" required>
+                    <br>
+                    <br>
+                </form>
+            </div>
+
+            <div class="buttom-btn mt-2">
+                <a href="checkout.html">
+                    <button class="btn back mr-1">Go Back</button>
+                </a>
+                <a href="orderSuccess.html">
+                    <button class="btn next mr-1" type="submit">Order</button></a>
+            </div>
         </div>
-        <hr>
-        <p class="d-flex w-60">
-            <span>Total :</span>
-            <span id="totalCost"></span>
-        </p>
-    </div>
-
-    <div class="card text-center mt-2">
-        <form id="ordercheckout">
-            <label for="Address">Address:</label>
-            <input type="text" id="address" name="address" required>
-            <br>
-            <br>
-        </form>
-    </div>
-
-    <br>
-    <div class="button">
-        <a href="checkout.html">
-            <button>Go Back</button>
-        </a>
-        <a href="orderSuccess.html">
-            <button type="submit">Submit Order</button></a>
     </div>
 </body>
 
