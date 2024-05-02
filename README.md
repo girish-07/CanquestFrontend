@@ -20,6 +20,8 @@ Visual Studio Code
 Navigate to the root folder and give the command
 http-server
 in the terminal
+ngrok http http://localhost:8080
+Use this command where ngrok acts as a reverse proxy to route the request to localhost:8080 (Where Jenkins is running)
 
 ## NOTE TO THE CONTRIBUTORS
 Please add the tech stacks or any specifications. Keep documenting the tools used along with the versions. Please use stable version.
