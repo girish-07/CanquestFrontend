@@ -203,7 +203,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             selectButton.classList.add('btn', 'btn-primary');
                             selectButton.textContent = 'Order';
                             selectButton.addEventListener('click', function() {
-
+                                const planName = plan['Third Party Internet Provider'];
+                                sessionStorage.setItem('planName', planName);
                                 //add sessionstorage variables
                                 if(buyOrRent === "buy") {
                                     sessionStorage.setItem('retailPrice', plan["Retail"]);
