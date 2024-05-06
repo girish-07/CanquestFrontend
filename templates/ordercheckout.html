@@ -9,10 +9,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const buyOrRent = sessionStorage.getItem("buy_rent_option");
-            const planName = sessionStorage.getItem('planName');
-            document.getElementById('orderTitle').textContent = `${planName}`;
-            document.getElementById('retailPrice').textContent = `$ ${parseInt(sessionStorage.getItem('retailPrice')) || 'N/A'}`;
-            document.getElementById('newConnectionCost').textContent = `$ ${parseInt(sessionStorage.getItem('newConnectionCost')) || 'N/A'}`;
+            // const planName = sessionStorage.getItem('planName');
+            // document.getElementById('orderTitle').textContent = `${planName}`;
+            document.getElementById('monthlySub').textContent = `$ ${parseInt(sessionStorage.getItem('monthlySub')) || 'N/A'}`;
+            document.getElementById('retail').textContent = `$ ${parseInt(sessionStorage.getItem('retail')) || 'N/A'}`;
 
             if (buyOrRent === 'buy') {
                 document.getElementById('modemCost').textContent = `$ ${parseInt(sessionStorage.getItem('modemCost')) || 'N/A'}`;
@@ -32,18 +32,18 @@
 
 <body>
     <h1 class="title">ORDER</h1>
-    <h3 class="title" id="orderTitle"></h3>
-    <div>
+    <!-- <h3 class="title" id="orderTitle"></h3> -->
+    <div class="d-flex">
         <div class="card text-center">
             <h3>Plan cost spilt up</h3>
             <hr>
             <p class="d-flex-row justify-space-between">
-                <span class="w-50 d-flex-row justify-start">Retail Price :</span>
-                <span class="w-50 d-flex-row justify-start" id="retailPrice"></span><br>
+                <span class="w-50 d-flex-row justify-start">Monthly Subscription Cost :</span>
+                <span class="w-50 d-flex-row justify-start" id="monthlySub"></span><br>
             </p>
             <p class="d-flex-row justify-space-between">
-                <span class="w-50 d-flex-row justify-start">New connection cost :</span>
-                <span class="w-50 d-flex-row justify-start" id="newConnectionCost"></span><br>
+                <span class="w-50 d-flex-row justify-start">Retail cost :</span>
+                <span class="w-50 d-flex-row justify-start" id="retail"></span><br>
             </p>
             <div id="buyCosts">
                 <p class="d-flex-row justify-space-between">
@@ -72,25 +72,41 @@
             </p>
         </div>
 
-        <div>
-            <div class="card text-center mt-2">
-                <form id="ordercheckout">
-                    <br>
-                    <label for="Address">Address:</label>
+        <div class="card text-center mt-2">
+            <form id="ordercheckout">
+                <div class="mb-1 mt-1">
+                    <label for="Address">Name:</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div class="mb-1">
+                    <label for="Address">Phone Number:</label>
+                    <input type="text" id="number" name="number">
+                </div>
+                <div class="mb-1">
+                    <label for="Address">E-mail:</label>
+                    <input type="text" id="mail" name="mail">
+                </div>
+                <div class="mb-1">
+                    <label for="Address">Service Address:</label>
                     <input type="text" id="address" name="address" required>
-                    <br>
-                    <br>
-                </form>
-            </div>
-
-            <div class="buttom-btn mt-2">
-                <a href="checkout.html">
-                    <button class="btn back mr-1">Go Back</button>
-                </a>
-                <a href="orderSuccess.html">
-                    <button class="btn next mr-1" type="submit">Order</button></a>
-            </div>
+                </div>
+                <div class="mb-1">
+                    <label for="Address">Postal Code:</label>
+                    <input type="text" id="postalCode" name="postalCode" required>
+                </div>
+                <div class="mb-1">
+                    <label for="Address">Install Date:</label>
+                    <input type="date" id="install" name="postalCode" required>
+                </div>
+            </form>
         </div>
+    </div>
+    <div class="buttom-btn mt-2">
+        <a href="checkout.html">
+            <button class="btn back mr-1">Go Back</button>
+        </a>
+        <a href="orderSuccess.html">
+            <button class="btn next mr-1" type="submit">Order</button></a>
     </div>
 </body>
 

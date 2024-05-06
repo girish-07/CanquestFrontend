@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // plansList.appendChild(rowHeading);
                     let counter=0;
                     plans.sort(sortByMaxSpeed);
-                    plans.forEach(plan => {
+                    plans.forEach((plan, index) => {
                         let modemRental = parseFloat(plan["Modem Rental/ Month"].replace('$', '')) || 0; // If NaN, default to 0
                         let routerRetail = parseFloat(plan["Router Retail"].replace('$', '')) || 0; // If NaN, default to 0
                         let routerRental = parseFloat(plan["Router Rental"].replace('$', '')) || 0; // If NaN, default to 0
@@ -98,8 +98,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         // let routerRetail = parseFloat(plan["Router Retail"].replace('$', ''))
                         // let routerRental = parseFloat(plan["Router Rental"].replace('$', ''))
                         // let rentRate = parseInt(plan["Retail"])+parseInt(plan["1x Connect. Cost (New)"])+parseInt(modemRental)+parseInt(routerRental);
-                        let buyRate = parseInt(plan["Retail"])+parseInt(plan["1x Connect. Cost (New)"])+parseInt(plan["Modem Cost"])+parseInt(routerRetail);
+                        let buyRate = parseInt(plan["Retail"])+parseInt(plan["1x Connect. Cost (New)"])+parseInt(routerRetail);
                         if (counter < 6) {
+                            const speedValues = plan["Speed"].split('/'); // Split the string into an array
                             const card = document.createElement('div');
                             card.classList.add('card');
                         
@@ -108,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                             const cardTitle = document.createElement('h5');
                             cardTitle.classList.add('card-title');
-                            cardTitle.textContent = `${plan["Third Party Internet Provider"]}`;
+                            cardTitle.textContent = `Internet ${speedValues[0]}`;
                             // cardTitle.textContent = `Speed: ${plan["Speed"]}`;
                         
                             // const serviceProvider = document.createElement('p');
@@ -122,8 +123,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             // const maxSpeed = document.createElement('p');
                             // maxSpeed.classList.add('card-text');
                             // maxSpeed.textContent = `${plan["Speed"]}`;
-
-                            const speedValues = plan["Speed"].split('/'); // Split the string into an array
 
                             const maxSpeed = speedValues[0]; // Maximum speed is the first value
                             const minSpeed = speedValues[1]; // Minimum speed is the second value
@@ -173,49 +172,85 @@ document.addEventListener('DOMContentLoaded', function() {
                             //     handleRadioButtonClick(plan);
                             // });
 
-                            const rentModemCheckbox = document.createElement('input');
-                            rentModemCheckbox.setAttribute('type', 'checkbox');
-                            rentModemCheckbox.setAttribute('id', 'rentModemCheckbox'); // Set id for the checkbox if needed
+                            const buyerRadio = document.createElement('input');
+                            buyerRadio.setAttribute('type', 'radio');
+                            buyerRadio.setAttribute('name', 'typeOfModem');
+                            buyerRadio.setAttribute('id', `buyerRadio-${index}`); // Set id for the checkbox if needed
                             // const getRent = sessionStorage.getItem("buy_rent_option");
-                            // rentModemCheckbox.checked = getRent === 'rent' ? true : false;
-                            rentModemCheckbox.checked = true
+                            // buyerRadio.checked = getRent === 'rent' ? true : false;
+                            // buyerRadio.checked = true
+
+                            // Create label element for the checkbox
+                            const buyerLabel = document.createElement('label');
+                            buyerLabel.setAttribute('for', `buyerRadio-${index}`); // Set for attribute to associate the label with the checkbox
+                            buyerLabel.textContent = 'Purchase Modem / Router'; // Text content for the label
+
+                            // Create container for the checkbox and label
+                            const buyderDiv = document.createElement('div');
+                            buyderDiv.classList.add('mt-1');
+                            buyderDiv.classList.add('rent-modem-container');
+
+                            let getBuyer = buyerRadio.checked ? 'buy' : 'rent';
+                            buyerRadio.addEventListener('change', function() {
+                                document.getElementById(`rentalRadio-${index}`).checked = false;
+                                getBuyer = this.checked ? 'buy' : 'rent';
+                                sessionStorage.setItem("buy_rent_option", this.checked ? 'buy' : 'rent');
+                            });
+
+                            const rentalRadio = document.createElement('input');
+                            rentalRadio.setAttribute('type', 'radio');
+                            buyerRadio.setAttribute('name', 'typeOfModem');
+                            rentalRadio.setAttribute('id', `rentalRadio-${index}`); // Set id for the checkbox if needed
+                            // const getRent = sessionStorage.getItem("buy_rent_option");
+                            // rentalRadio.checked = getRent === 'rent' ? true : false;
+                            rentalRadio.checked = true
 
                             // Create label element for the checkbox
                             const rentModemLabel = document.createElement('label');
-                            rentModemLabel.setAttribute('for', 'rentModemCheckbox'); // Set for attribute to associate the label with the checkbox
-                            rentModemLabel.textContent = 'Rent Modem / Router'; // Text content for the label
+                            rentModemLabel.setAttribute('for', `rentalRadio-${index}`); // Set for attribute to associate the label with the checkbox
+                            rentModemLabel.textContent = 'Rental Modem / Router'; // Text content for the label
 
                             // Create container for the checkbox and label
                             const rentModemContainer = document.createElement('div');
                             rentModemContainer.classList.add('mt-1');
                             rentModemContainer.classList.add('rent-modem-container');
 
-                            let buyOrRent = rentModemCheckbox.checked ? 'rent' : 'buy';
-                            rentModemCheckbox.addEventListener('change', function() {
-                                buyOrRent = this.checked ? 'rent' : 'buy';
+                            let getRental = rentalRadio.checked ? 'rent' : 'buy';
+                            rentalRadio.addEventListener('change', function() {
+                                document.getElementById(`buyerRadio-${index}`).checked = false;
+                                getRental = this.checked ? 'rent' : 'buy';
                                 sessionStorage.setItem("buy_rent_option", this.checked ? 'rent' : 'buy');
                             });
 
-                            rentModemContainer.appendChild(rentModemCheckbox);
+                            rentModemContainer.appendChild(rentalRadio);
                             rentModemContainer.appendChild(rentModemLabel);
+                            rentModemContainer.appendChild(buyerRadio);
+                            rentModemContainer.appendChild(buyerLabel);
                         
                             const selectButton = document.createElement('button');
                             selectButton.classList.add('btn', 'btn-primary');
                             selectButton.textContent = 'Order';
                             selectButton.addEventListener('click', function() {
+                                if (document.getElementById(`rentalRadio-${index}`).checked === true) {
+                                    sessionStorage.setItem("buy_rent_option", 'rent');
+                                } else {
+                                    sessionStorage.setItem("buy_rent_option", 'buy');
+                                }
                                 const planName = plan['Third Party Internet Provider'];
                                 sessionStorage.setItem('planName', planName);
+                                const monthlySubBuy = parseInt(plan["Retail"]) + parseInt(plan['1x Connect. Cost (New)']) + parseInt(plan['Modem Retail'])  + parseInt(parseFloat(plan['Router Retail'].replace("$", "")))
+                                const monthlySubRental = parseInt(plan["Retail"]) + parseInt(plan['1x Connect. Cost (New)']) + parseInt(parseFloat(plan['Modem Rental/ Month'].replace("$", "")))  + parseInt(parseFloat(plan['Router Rental'].replace("$", "")))
                                 //add sessionstorage variables
-                                if(buyOrRent === "buy") {
-                                    sessionStorage.setItem('retailPrice', plan["Retail"]);
-                                    sessionStorage.setItem('newConnectionCost', plan["1x Connect. Cost (New)"]);
+                                if(getBuyer === "buy") {
+                                    sessionStorage.setItem('monthlySub', monthlySubBuy);
+                                    sessionStorage.setItem('retail', plan["Retail"]);
                                     sessionStorage.setItem('modemCost', plan["Modem Cost"]);
                                     sessionStorage.setItem('routerRetailCost', routerRetail);
                                     sessionStorage.setItem('totalPrice', buyRate)
                                 }
                                 else {
-                                    sessionStorage.setItem('retailPrice', plan["Retail"]);
-                                    sessionStorage.setItem('newConnectionCost', plan["1x Connect. Cost (New)"]);
+                                    sessionStorage.setItem('monthlySub', monthlySubRental);
+                                    sessionStorage.setItem('retail', plan["Retail"]);
                                     sessionStorage.setItem('modemRentalCost', modemRental);
                                     sessionStorage.setItem('routerRentalCost', routerRental);
                                     sessionStorage.setItem('totalPrice', rentRate);
@@ -249,14 +284,14 @@ document.addEventListener('DOMContentLoaded', function() {
                             option1.textContent = 'Cable';
                             option1.value = 'cable'; // Set value attribute if needed
                             
-                            const option2 = document.createElement('option');
-                            option2.textContent = 'DSL';
-                            option2.value = 'dsl'; // Set value attribute if needed
+                            // const option2 = document.createElement('option');
+                            // option2.textContent = 'DSL';
+                            // option2.value = 'dsl'; // Set value attribute if needed
                             
                             // Append options to the dropdown
                             technologyDropdown.appendChild(option1);
-                            technologyDropdown.appendChild(option2);
-                            
+                            // technologyDropdown.appendChild(option2);
+                            technologyDropdown.disabled = true;
                             // Append label and dropdown to the container
                             labelValuePairContainer.appendChild(technologyLabel);
                             labelValuePairContainer.appendChild(technologyDropdown);
@@ -340,16 +375,17 @@ document.addEventListener('DOMContentLoaded', function() {
                             radioButton.setAttribute('type', 'radio');
                             radioButton.setAttribute('value', plan);
                             radioButton.addEventListener('click', function() {
+                                const monthlySub = plan["Retail"] + plan['1x Connect. Cost (New)'] + parseFloat(plan['Modem Rental/ Month'].replace("$", "")) + parseFloat(plan['Router Rental'].replace("$", ""))
                                 if(buyOrRent === "buy") {
-                                    sessionStorage.setItem('retailPrice', plan["Retail"]);
-                                    sessionStorage.setItem('newConnectionCost', plan["1x Connect. Cost (New)"]);
+                                    sessionStorage.setItem('monthlySub', monthlySub);
+                                    sessionStorage.setItem('retail', plan["Retail"]);
                                     sessionStorage.setItem('modemCost', plan["Modem Cost"]);
                                     sessionStorage.setItem('routerRetailCost', routerRetail);
                                     sessionStorage.setItem('totalPrice', buyRate)
                                 }
                                 else {
-                                    sessionStorage.setItem('retailPrice', plan["Retail"]);
-                                    sessionStorage.setItem('newConnectionCost', plan["1x Connect. Cost (New)"]);
+                                    sessionStorage.setItem('monthlySub', monthlySub);
+                                    sessionStorage.setItem('retail', plan["Retail"]);
                                     sessionStorage.setItem('modemRentalCost', modemRental);
                                     sessionStorage.setItem('routerRentalCost', routerRental);
                                     sessionStorage.setItem('totalPrice', rentRate);

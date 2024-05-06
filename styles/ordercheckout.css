@@ -3,7 +3,7 @@
   transition: 0.3s;
   padding: 2px 16px;
   margin: 10px;
-  
+  width: 100%;
 }
 
 .title{
@@ -21,8 +21,11 @@
 }
 
 .text-center {
-    margin: 0 30rem;
     text-align: center;
+}
+
+.d-flex {
+    display: flex;
 }
 
 .d-flex-row {
@@ -32,10 +35,6 @@
 
 .justify-space-between {
     justify-content: space-between;
-}
-
-.w-50 {
-    width: 50%;
 }
 
 .justify-start {
