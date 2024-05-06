@@ -9,10 +9,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const buyOrRent = sessionStorage.getItem("buy_rent_option");
-            const planName = sessionStorage.getItem('planName');
-            document.getElementById('orderTitle').textContent = `${planName}`;
-            document.getElementById('retailPrice').textContent = `$ ${parseInt(sessionStorage.getItem('retailPrice')) || 'N/A'}`;
-            document.getElementById('newConnectionCost').textContent = `$ ${parseInt(sessionStorage.getItem('newConnectionCost')) || 'N/A'}`;
+            // const planName = sessionStorage.getItem('planName');
+            // document.getElementById('orderTitle').textContent = `${planName}`;
+            document.getElementById('monthlySub').textContent = `$ ${parseInt(sessionStorage.getItem('monthlySub')) || 'N/A'}`;
+            document.getElementById('retail').textContent = `$ ${parseInt(sessionStorage.getItem('retail')) || 'N/A'}`;
 
             if (buyOrRent === 'buy') {
                 document.getElementById('modemCost').textContent = `$ ${parseInt(sessionStorage.getItem('modemCost')) || 'N/A'}`;
@@ -32,18 +32,18 @@
 
 <body>
     <h1 class="title">ORDER</h1>
-    <h3 class="title" id="orderTitle"></h3>
+    <!-- <h3 class="title" id="orderTitle"></h3> -->
     <div>
         <div class="card text-center">
             <h3>Plan cost spilt up</h3>
             <hr>
             <p class="d-flex-row justify-space-between">
-                <span class="w-50 d-flex-row justify-start">Retail Price :</span>
-                <span class="w-50 d-flex-row justify-start" id="retailPrice"></span><br>
+                <span class="w-50 d-flex-row justify-start">Monthly Subscription Cost :</span>
+                <span class="w-50 d-flex-row justify-start" id="monthlySub"></span><br>
             </p>
             <p class="d-flex-row justify-space-between">
-                <span class="w-50 d-flex-row justify-start">New connection cost :</span>
-                <span class="w-50 d-flex-row justify-start" id="newConnectionCost"></span><br>
+                <span class="w-50 d-flex-row justify-start">Retail cost :</span>
+                <span class="w-50 d-flex-row justify-start" id="retail"></span><br>
             </p>
             <div id="buyCosts">
                 <p class="d-flex-row justify-space-between">
@@ -73,7 +73,7 @@
         </div>
 
         <div>
-            <div class="card text-center mt-2">
+            <!-- <div class="card text-center mt-2">
                 <form id="ordercheckout">
                     <br>
                     <label for="Address">Address:</label>
@@ -81,7 +81,7 @@
                     <br>
                     <br>
                 </form>
-            </div>
+            </div> -->
 
             <div class="buttom-btn mt-2">
                 <a href="checkout.html">

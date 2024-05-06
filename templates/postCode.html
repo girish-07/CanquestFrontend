@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +8,38 @@
     <link rel="stylesheet" href="..\styles\postcode.css">
     <link rel="stylesheet" href="../styles/common.css">
 </head>
+
 <body>
     <div class="container">
         <h1>SERVICE AVAILABILITY </h1>
-        <form action="#" id="postcodeForm">
-            <label for="postcode">Enter the Postcode: </label>
-            <input type="text" id="postcode" name="postcode" placeholder="Postcode" required />
-            <br /><br />
+        <div class="card text-center mt-2">
+            <form id="postcodeForm">
+                <div class="d-flex-row justify-space-between mb-1">
+                    <label for="Address">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="d-flex-row justify-space-between mb-1">
+                    <label for="Address">Phone Number:</label>
+                    <input type="text" id="number" name="number" required>
+                </div>
+                <div class="d-flex-row justify-space-between mb-1">
+                    <label for="Address">E-mail:</label>
+                    <input type="text" id="mail" name="mail" required>
+                </div>
+                <div class="d-flex-row justify-space-between mb-1">
+                    <label for="Address">Service Address:</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+                <div class="d-flex-row justify-space-between mb-1">
+                    <label for="postcode">Enter the Postcode: </label>
+                    <input type="text" id="postcode" name="postcode" placeholder="Postcode" required />
+                </div>
 
-            <input class="btn next" type="submit" value="Submit">
-        </form>
+                <input class="btn next" type="submit" value="Submit">
+            </form>
+        </div>
     </div>
     <script src="../scripts/postCodeScript.js"></script>
 </body>
+
 </html>
