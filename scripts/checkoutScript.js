@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             // Create label element for the checkbox
                             const buyerLabel = document.createElement('label');
                             buyerLabel.setAttribute('for', `buyerRadio-${index}`); // Set for attribute to associate the label with the checkbox
-                            buyerLabel.textContent = 'Buyer Modem / Router'; // Text content for the label
+                            buyerLabel.textContent = 'Purchase Modem / Router'; // Text content for the label
 
                             // Create container for the checkbox and label
                             const buyderDiv = document.createElement('div');
